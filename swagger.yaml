@@ -1,0 +1,153 @@
+swagger: "2.0"
+info:
+  description: Fetch RSS feeds
+  title: rss-reader
+  version: "1.0"
+  x-direktiv-meta:
+    container: gcr.io/direktiv/functions/rss-reader
+    maintainer: |-
+      [direktiv.io](https://www.direktiv.io) 
+    issues: https://github.com/direktiv-apps/rss-reader/issues
+    url: https://github.com/direktiv-apps/rss-reader  
+    categories:
+    - social
+    - network
+    license: |-
+      [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+    long-description: >-
+      This function fetches RSS feeds and converts them into JSON. It can limit the results and has a simple text search.
+consumes:
+- application/json
+produces:
+- application/json
+schemes:
+- http
+paths:
+  /: 
+    delete:
+      parameters:
+        - name: Direktiv-ActionID
+          in: header
+          type: string
+          description: |
+            On cancel Direktiv sends a DELETE request to
+            the action with id in the header
+      x-direktiv:
+        cancel: echo 'cancel {{ .DirektivActionID }}'
+      responses:
+        200:
+    post:
+      parameters:
+        - name: Direktiv-ActionID
+          in: header
+          type: string
+          default: development
+          description: |
+            direktiv action id is an UUID. 
+            For development it can be set to 'development'
+        - name: Direktiv-TempDir
+          in: header
+          type: string
+          default: /tmp
+          description: |
+            direktiv temp dir is the working directory for that request
+            For development it can be set to e.g. '/tmp'
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              rss:
+                type: string
+                description: URL of the news feed
+                example: https://www.theonion.com/rss
+              limit:
+                type: integer
+                description: Limit number of news items
+                example: 10
+              search:
+                type: string
+                description: Simple search term for RSS items
+                example: hello
+      # direktiv code generation is configured here
+      x-direktiv-function: |-
+        functions:
+        - id: rss-reader
+          image: gcr.io/direktiv/functions/rss-reader:1.0
+          type: knative-workflow
+      x-direktiv-examples:
+        - title: Basic
+          content: |-
+            - id: rss-reader
+              type: action
+              action:
+                function: rss-reader
+                input: 
+                  url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+        - title: Advanced
+          content: |-
+            - id: rss-reader
+              type: action
+              action:
+                function: rss-reader
+                input: 
+                  url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+                  limit: 1
+                  search: people
+      x-direktiv:  
+        cmds:
+        - action: exec
+          exec: '/bin/rss {{ .Rss }}'
+        output: |
+          {
+            "rss-reader": {{ index (index . 0) "result" | toJson }}
+          }
+      x-direktiv-errors:
+        io.direktiv.command.error: Command execution failed
+        io.direktiv.output.error: Template error for output generation of the service
+        io.direktiv.ri.error: Can not create information object from request
+      responses:
+        200:
+          description: List of executed commands.
+          examples:
+            rss-reader:
+               Channel:
+                  Items:
+                  - Content:
+                    Description: Caribbean and UN leaders were on hand for the first regional launch
+                      of a plan to ensure that every person on the planet is protected by early warning
+                      systems by 2027, held in Bridgetown, Barbados on Tuesday.?
+                    Guid: https://news.un.org/feed/view/en/story/2023/02/1133247
+                    Link: https://news.un.org/feed/view/en/story/2023/02/1133247
+                    PubDate: Tue, 07 Feb 2023 12:00:00 +0000
+                    Source: UN News - Global perspective Human stories
+                    Title: Caribbean sees first regional launch of global plan on early warning systems
+          schema:
+            type: object
+            additionalProperties: {}
+        default:
+          description: generic error response
+          headers:
+            Direktiv-ErrorCode:
+              type: string
+            Direktiv-ErrorMessage:
+              type: string
+          schema:
+            $ref: "#/definitions/error"
+definitions:
+  direktivFile:
+    type: object
+    x-go-type:
+      type: DirektivFile
+      import:
+        package: github.com/direktiv/apps/go/pkg/apps 
+  error:
+    type: object
+    required:
+      - errorCode
+      - errorMessage
+    properties:
+      errorCode:
+        type: string
+      errorMessage:
+        type: string

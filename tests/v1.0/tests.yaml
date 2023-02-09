@@ -1,0 +1,21 @@
+url: ""
+functions:
+- type: knative-workflow
+  id: rss-reader
+  image: gcr.io/direktiv/functions/rss-reader:test
+states:
+- id: state0
+  type: action
+  action:
+    function: rss-reader
+    input:
+      url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+  transition: state1
+- id: state1
+  type: action
+  action:
+    function: rss-reader
+    input:
+      limit: 1
+      search: people
+      url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
