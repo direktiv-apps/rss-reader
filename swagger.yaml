@@ -83,7 +83,7 @@ paths:
               action:
                 function: rss-reader
                 input: 
-                  url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+                  rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
         - title: Advanced
           content: |-
             - id: rss-reader
@@ -91,7 +91,7 @@ paths:
               action:
                 function: rss-reader
                 input: 
-                  url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+                  rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
                   limit: 1
                   search: people
       x-direktiv:  

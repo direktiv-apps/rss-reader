@@ -144,11 +144,11 @@ func init() {
         },
         "x-direktiv-examples": [
           {
-            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml",
+            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml",
             "title": "Basic"
           },
           {
-            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml\n      limit: 1\n      search: people",
+            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml\n      limit: 1\n      search: people",
             "title": "Advanced"
           }
         ],
@@ -311,11 +311,11 @@ func init() {
         },
         "x-direktiv-examples": [
           {
-            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml",
+            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml",
             "title": "Basic"
           },
           {
-            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml\n      limit: 1\n      search: people",
+            "content": "- id: rss-reader\n  type: action\n  action:\n    function: rss-reader\n    input: \n      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml\n      limit: 1\n      search: people",
             "title": "Advanced"
           }
         ],

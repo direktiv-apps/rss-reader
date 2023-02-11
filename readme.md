@@ -31,7 +31,7 @@ functions:
   action:
     function: rss-reader
     input: 
-      url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
 ```
    #### Advanced
 ```yaml
@@ -40,7 +40,7 @@ functions:
   action:
     function: rss-reader
     input: 
-      url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
       limit: 1
       search: people
 ```
@@ -104,7 +104,7 @@ functions:
 
 | Name | Type | Go type | Required | Default | Description | Example |
 |------|------|---------|:--------:| ------- |-------------|---------|
-| limit | integer| `int64` |  | | Limit number of news items | `10` |
+| limit | integer| `int64` |  | | Limit number of news items and 0 returns all items. | `10` |
 | rss | string| `string` |  | | URL of the news feed | `https://www.theonion.com/rss` |
 | search | string| `string` |  | | Simple search term for RSS items | `hello` |
 

@@ -9,7 +9,7 @@ states:
   action:
     function: rss-reader
     input:
-      url: ttps://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
+      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
   transition: state1
 - id: state1
   type: action
@@ -17,5 +17,5 @@ states:
     function: rss-reader
     input:
       limit: 1
+      rss: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
       search: people
-      url: https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml
