@@ -73,8 +73,10 @@ func main() {
 	}
 
 	// shorten the results
-	if limit > 0 && limit > len(feed.Channel.Items) {
-		limit = len(feed.Channel.Items) - 1
+	if limit > 0 {
+		if limit > len(feed.Channel.Items) {
+			limit = len(feed.Channel.Items) - 1
+		}
 		feed.Channel.Items = feed.Channel.Items[:limit]
 	}
 

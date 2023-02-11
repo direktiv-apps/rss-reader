@@ -51,7 +51,7 @@ func NewRssReaderAPI(spec *loads.Document) *RssReaderAPI {
 	}
 }
 
-/*RssReaderAPI Run rss-reader in Direktiv */
+/*RssReaderAPI Fetch RSS feeds */
 type RssReaderAPI struct {
 	spec            *loads.Document
 	context         *middleware.Context

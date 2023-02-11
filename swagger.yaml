@@ -63,7 +63,7 @@ paths:
                 example: https://www.theonion.com/rss
               limit:
                 type: integer
-                description: Limit number of news items
+                description: Limit number of news items and 0 returns all items.
                 example: 10
               search:
                 type: string
@@ -97,7 +97,7 @@ paths:
       x-direktiv:  
         cmds:
         - action: exec
-          exec: '/bin/rss {{ .Rss }}'
+          exec: '/bin/rss {{ .Rss }} {{ .Limit }} {{ .Search }}'
         output: |
           {
             "rss-reader": {{ index (index . 0) "result" | toJson }}

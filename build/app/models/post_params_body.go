@@ -17,7 +17,7 @@ import (
 // swagger:model postParamsBody
 type PostParamsBody struct {
 
-	// Limit number of news items
+	// Limit number of news items and 0 returns all items.
 	// Example: 10
 	Limit int64 `json:"limit,omitempty"`
 

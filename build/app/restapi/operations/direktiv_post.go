@@ -143,7 +143,7 @@ func runCommand0(ctx context.Context,
 		params.DirektivDir,
 	}
 
-	cmd, err := templateString(`/bin/rss {{ .Rss }}`, at, params.DirektivDir)
+	cmd, err := templateString(`/bin/rss {{ .Rss }} {{ .Limit }} {{ .Search }}`, at, params.DirektivDir)
 	if err != nil {
 		ri.Logger().Infof("error executing command: %v", err)
 		ir[resultKey] = err.Error()

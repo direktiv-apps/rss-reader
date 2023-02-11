@@ -15,7 +15,8 @@ Scenario: get request
 	And request
 	"""
 	{
-		"rss": "https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml"
+		"rss": "https://news.un.org/feed/subscribe/en/news/region/americas/feed/rss.xml",
+		"limit": 1
 	}
 	"""
 	When method POST

@@ -19,9 +19,7 @@ FROM golang:1.19-alpine as buildapp
 
 COPY cmd cmd/
 
-RUN ls -la 
 RUN cd cmd && go build -tags osusergo,netgo -o /rss main.go; 
-
 
 FROM ubuntu:22.04
 

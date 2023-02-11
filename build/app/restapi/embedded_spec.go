@@ -29,17 +29,18 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "description": "Run rss-reader in Direktiv",
+    "description": "Fetch RSS feeds",
     "title": "rss-reader",
     "version": "1.0",
     "x-direktiv-meta": {
       "categories": [
-        "unknown"
+        "social",
+        "network"
       ],
       "container": "gcr.io/direktiv/functions/rss-reader",
       "issues": "https://github.com/direktiv-apps/rss-reader/issues",
       "license": "[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)",
-      "long-description": "Run rss-reader in Direktiv as a function",
+      "long-description": "This function fetches RSS feeds and converts them into JSON. It can limit the results and has a simple text search.",
       "maintainer": "[direktiv.io](https://www.direktiv.io) ",
       "url": "https://github.com/direktiv-apps/rss-reader"
     }
@@ -69,7 +70,7 @@ func init() {
               "type": "object",
               "properties": {
                 "limit": {
-                  "description": "Limit number of news items",
+                  "description": "Limit number of news items and 0 returns all items.",
                   "type": "integer",
                   "example": 10
                 },
@@ -131,7 +132,7 @@ func init() {
           "cmds": [
             {
               "action": "exec",
-              "exec": "/bin/rss {{ .Rss }}"
+              "exec": "/bin/rss {{ .Rss }} {{ .Limit }} {{ .Search }}"
             }
           ],
           "output": "{\n  \"rss-reader\": {{ index (index . 0) \"result\" | toJson }}\n}\n"
@@ -212,17 +213,18 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "description": "Run rss-reader in Direktiv",
+    "description": "Fetch RSS feeds",
     "title": "rss-reader",
     "version": "1.0",
     "x-direktiv-meta": {
       "categories": [
-        "unknown"
+        "social",
+        "network"
       ],
       "container": "gcr.io/direktiv/functions/rss-reader",
       "issues": "https://github.com/direktiv-apps/rss-reader/issues",
       "license": "[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)",
-      "long-description": "Run rss-reader in Direktiv as a function",
+      "long-description": "This function fetches RSS feeds and converts them into JSON. It can limit the results and has a simple text search.",
       "maintainer": "[direktiv.io](https://www.direktiv.io) ",
       "url": "https://github.com/direktiv-apps/rss-reader"
     }
@@ -297,7 +299,7 @@ func init() {
           "cmds": [
             {
               "action": "exec",
-              "exec": "/bin/rss {{ .Rss }}"
+              "exec": "/bin/rss {{ .Rss }} {{ .Limit }} {{ .Search }}"
             }
           ],
           "output": "{\n  \"rss-reader\": {{ index (index . 0) \"result\" | toJson }}\n}\n"
@@ -368,7 +370,7 @@ func init() {
       "type": "object",
       "properties": {
         "limit": {
-          "description": "Limit number of news items",
+          "description": "Limit number of news items and 0 returns all items.",
           "type": "integer",
           "example": 10
         },

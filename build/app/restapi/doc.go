@@ -2,7 +2,7 @@
 
 // Package restapi rss-reader
 //
-//	Run rss-reader in Direktiv
+//	Fetch RSS feeds
 //	Schemes:
 //	  http
 //	Host: localhost
